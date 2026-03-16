@@ -56,7 +56,7 @@ FIREWORKS_API_KEY=your_fireworks_api_key
 
 1. **Clone the repository:**
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/ankita383/RAG-LangGraph.git
 cd New-project
 
 ```
@@ -103,6 +103,7 @@ The server will be available at `http://127.0.0.1:8000`.
 ```text
 ├── app.py              # FastAPI server & Self-healing logic
 ├── src/
+│   ├── state.py
 │   ├── ingest.py       # PDF processing & VectorStore creation
 │   ├── graph.py        # LangGraph workflow definition
 │   └── nodes.py        # Retrieval & Generation node logic
