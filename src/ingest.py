@@ -6,7 +6,7 @@ from langchain_fireworks import FireworksEmbeddings
 
 def process_pdf_to_vectorstore(file_path: str, storage_path: str):
     embeddings = FireworksEmbeddings(
-        model="thenlper/gte-large",
+        model="fireworks/qwen3-embedding-8b",
         fireworks_api_key=os.getenv("FIREWORKS_API_KEY")
     )
 
