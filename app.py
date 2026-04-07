@@ -29,8 +29,8 @@ async def startup_event():
         return
 
     print("Default PDF found. Ingesting...")
-    retriever = process_pdf_to_vectorstore(default_pdf, VECTOR_PATH)
-    rag_app = create_rag_graph(retriever)
+    retriever_bundle = process_pdf_to_vectorstore(default_pdf)
+    rag_app = create_rag_graph(retriever_bundle)
 
 
 class QuestionRequest(BaseModel):
@@ -78,8 +78,8 @@ async def upload_pdf(file: UploadFile = File(...)):
     print(f"--- Uploaded: {file.filename}. Re-ingesting... ---")
 
     try:
-        retriever = process_pdf_to_vectorstore(save_path, VECTOR_PATH)
-        rag_app = create_rag_graph(retriever)
+        retriever_bundle = process_pdf_to_vectorstore(save_path)
+        rag_app = create_rag_graph(retriever_bundle)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Ingestion failed: {e}")
 
@@ -110,4 +110,7 @@ async def ask_question(request: QuestionRequest):
         raise HTTPException(status_code=500, detail="Internal AI Error")
 
 
-uvicorn.run(app, host="127.0.0.1", port=8000)
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("app:app", host="127.0.0.1", port=8000, reload=True)
+    
